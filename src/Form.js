@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { sendData } from "./Database";
 import classes from "./Form.module.css";
 
 const Form = () => {
@@ -48,7 +49,7 @@ const Form = () => {
 			registration,
 			sponsorship,
 			food,
-		].every((val) => val);
+		].every((val) => val || val === 0);
 		if (!notEmpty) {
 			setError("Please Fill Every inputs");
 			return;
@@ -60,12 +61,24 @@ const Form = () => {
 			registration,
 			sponsorship,
 			food,
-		].every((val) => typeof val === "number");
+		].every((val) => typeof Number(val) === "number");
 		if (!isNumber) {
 			setError("Please type number in the fields of Expenses");
+			console.log("er");
 			return;
 		}
 		if (notEmpty && isNumber) {
+			const eventObj = {
+				event_name: name,
+				event_venue: venue,
+				event_date: date,
+				event_foodExpenses: food,
+				event_stationaryExpenses: stationary,
+				event_registration: registration,
+				event_sponsorship: sponsorship,
+				event_banner: banner,
+			};
+			sendData(eventObj);
 		}
 	};
 
