@@ -1,9 +1,11 @@
 import "./App.css";
+import Form from "./Form";
 
 function App() {
 	return (
 		<div className="App">
-			<h1>Interact Website</h1>
+			<h1>Interact Event Expenses</h1>
+			<Form />
 		</div>
 	);
 }
